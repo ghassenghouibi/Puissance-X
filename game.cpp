@@ -12,7 +12,7 @@ using namespace std;
 
 
 int Game::play(int placement,int joueur){
-	if(placement>H){
+	if(placement>=L){
 		std::cout<<"This placment does'nt exist ! \n";
 		return 0;
 	}
