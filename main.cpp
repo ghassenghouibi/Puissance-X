@@ -5,16 +5,15 @@
 *
 *
 *
-*
 */
 #include <iostream>
-#include "jeu.hpp"
+#include "game.hpp"
 using namespace std;
 
 int main(){
 
-	Jeu jeu();	
-	std::cout<<"Hello\n";
+	Game game;
+	game.game_engine();
 	
 	return 0;
 }
