@@ -1,16 +1,7 @@
-/**
-** Class of the algorithm alpha-bêta  
-**	
-**
-**
-**
-**
-**
-**
-**
-** @author ghouibi ghassen 
-**/
-
+/*
+* This file contains functions of minmax algorithm
+* @author ghouibi ghassen 
+*/
 #include <iostream>
-using namespace std;
+#include "alpha-beta.hpp"
 

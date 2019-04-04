@@ -7,7 +7,6 @@
 #include <random>
 #include "game.hpp"
 
-using namespace std;
 
 
 
@@ -43,7 +42,12 @@ void Game::show_grid(){
 	}
 }
 
-
+void Game::init_grid(){
+	grid[L][H]={0};
+}
+int* Game::get_grid(){
+	return grid[L*H];
+}
 int Game::check_winner(){
 	played--;
 	if(played==0){
@@ -89,41 +93,26 @@ int Game::check_winner(){
 				std::cout<<"We have a winner Player Number  "<<grid[i][j]<<"\n";
 				return 1;
 			}
-			if( 	(grid[i][j] != 0) 
-				 && ( grid[i][j]== grid[i+1][j+1] )
-				 && ( grid[i][j]== grid[i+2][j+2] )
-				 && ( grid[i][j]== grid[i+3][j+3] )
-				 ){
-				std::cout<<"We have a winner Player Number  "<<grid[i][j]<<"\n";
-			}
+			
 		}
 	}
 	
+	//check diagonal
+	for(int i=3;i<L;i++){
+		for(int j=0;j<H-4;j++){
+
+			if( 	(grid[i][j] != 0) 
+				 && ( grid[i][j]== grid[i-1][j+1] )
+				 && ( grid[i][j]== grid[i-2][j+2] )
+				 && ( grid[i][j]== grid[i-3][j+3] )
+				 ){
+				std::cout<<"We have a winner Player Number  "<<grid[i][j]<<"\n";
+				return 1;
+			}
+			
+		}
+	}
+	
+
 	return 0;
-}
-
-void Game::game_engine(){
-	Game game;
-   	std::cout << "Hello this a game called Puissance 4\nvery simple you have to place 4 times your pawn \nvertically or horizontally or diagonally" << "\n";
-	game.show_grid();
-
-	int player,v,x,placment;
-	bool swap=true;
-	do{
-		if(swap)
-			player=1;
-		else
-			player=2;
-
-	 
-	    do{
-    	   	std::cout <<"Player "<<player<< " Your placment please? \n";
-	    	std::cin >> placment;
-	    	v=game.play(placment,player);
-		}while(v==0);
-    	x=game.check_winner();
-		swap=!(swap);
-
-	}while(x!=1);
-	std::cout<<"GoodBye !!\n";
 }

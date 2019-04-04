@@ -1,18 +1,14 @@
-
 /*
-*
-*
-*
-*
-*
+* This file contains the main function for the game
+* @author ghouibi ghassen
 */
 #include <iostream>
-#include "game.hpp"
+#include "gameEngine.hpp"
 using namespace std;
 
 int main(){
 
-	Game game;
+	GameEngine game;
 	game.game_engine();
 	
 	return 0;
