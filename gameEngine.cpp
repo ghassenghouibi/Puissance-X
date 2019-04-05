@@ -6,34 +6,58 @@
 #include "gameEngine.hpp"
 #include "game.hpp"
 #include "alpha-beta.hpp"
+
 void GameEngine::print_welcome(){
    	std::cout << "Hello this a game called Puissance 4\nvery simple you have to place 4 times your pawn \nvertically or horizontally or diagonally" << "\n";
 }
+
+void GameEngine::print_goodbye(){
+	std::cout<<"GoodBye my friend \n";
+}
 void GameEngine::game_engine(){
-	Game game;
+	
 	print_welcome();
-	game.init_grid();
-	game.show_grid();
-	game.get_grid();
 	int player,v,x,placment;
 	bool swap=true;
+	MinMax ia;
+	Game game;
+	grid_t grid;
+	
+	grid=game.init_grid();
+	game.show_grid(grid);
+
 	do{
 		if(swap)
 			player=1;
 		else
 			player=2;
 
-		    do{
-	    	   	std::cout <<"Player "<<player<< " Your placment please? \n";
-		    	std::cin >> placment;
-		    	v=game.play(placment,player);
-			}while(v==0);
-	    	x=game.check_winner();
+
+			if(player==1){
+			    do{
+		    	   	std::cout <<"Player "<<player<< " Your placment please? \n";
+			    	std::cin >> placment;
+			    	
+			    	v=game.check_play(grid,placment);
+			    	grid=game.play(grid,placment,player);
+			    	//ia.show_grid(placment,player);
+				}while(v==0);
+			}
+			else if(player==2){
+				do{
+		    	   	std::cout <<"IA it's your turn your placment please? \n";
+			    	placment=ia.play(grid);
+			    	v=game.check_play(grid,placment);
+			    	grid=game.play(grid,placment,player);
+			    	//ia.show_grid(placment,player);
+				}while(v==0);	
+			}
+	    	x=game.check_winner(grid);
 			swap=!(swap);
 
 
 	}while(x!=1);
-	std::cout<<"GoodBye !!\n";
 
+	print_goodbye();
     exit (EXIT_SUCCESS);
 }

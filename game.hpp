@@ -2,29 +2,18 @@
 * This file contains the game rules
 * @author ghouibi ghassen
 */
-#include <array>
-#define L 7
-#define H 6
-
-typedef struct board_t board_t;
-struct board_t{
-    int line;
-    int column;
-    int bord[L][H];
-};
+#include "shared.hpp"
 
 class Game{
 	public:
-		board_t _grid;
-		int grid[L][H]={0};
+		grid_t grid;
 		int played=L*H;
 	public:
-		void    init_grid();
-		int 	play(int placement,int player); 
-		void 	show_grid();
-		int  	check_winner();
-		void 	swap();
-		void 	game_engine();
-		int*    get_grid();
-        
+		grid_t    init_grid();
+		grid_t    get_grid();
+		grid_t 	  play(grid_t grid,int placement,int player); 
+		void 	  show_grid(grid_t grid);
+		int   	  check_winner(grid_t grid);
+		int       check_play(grid_t grid,int placement);
+
 };
