@@ -1,14 +1,17 @@
-.PHONY: clean, mrproper
+.PHONY: clean
 
 CC = g++
 CFLAGS = -W -Wall -std=c++14 -pthread
  
 
-all: main.o game.o alpha-beta.o gameEngine.o
-	$(CC) main.o game.o alpha-beta.o gameEngine.o -o Puissance4
+all: main.o game.o alpha-beta.o gameEngine.o node.o
+	$(CC) main.o game.o alpha-beta.o gameEngine.o node.o -o Connect4
 
 main.o: main.cpp
 	$(CC) -c main.cpp -o main.o $(CFLAGS)
+
+node.o: node.cpp node.hpp
+	$(CC) -c node.cpp -o node.o $(CFLAGS)
 
 gameEngine.o: gameEngine.cpp gameEngine.hpp
 	$(CC) -c gameEngine.cpp -o gameEngine.o $(CFLAGS)
