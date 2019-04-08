@@ -30,7 +30,6 @@ void MinMax::create_tree(grid_t grid){
 	Node* x;
 	tree.insert_node(x->new_node(0,1,2,grid));
 
-	exit(0);
 }
 
 

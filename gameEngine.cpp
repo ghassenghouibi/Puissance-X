@@ -45,9 +45,8 @@ void GameEngine::game_engine(){
 		else if(player==2){
 			do{
 	    	   	
-	    	   	std::cout <<"Player "<<player<< " Your placment please? \n";
-				std::cin >>placment;
-
+	    	   	std::cout <<"IA "<<player<< " Your placment please? \n";
+				placment=ia.play(grid,L*H);
 		    	v=game.check_play(grid,placment);
 		    	grid=game.play(grid,placment,player);
 		

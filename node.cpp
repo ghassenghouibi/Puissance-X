@@ -58,19 +58,10 @@ void Tree::insert_node(Node* node){
 	Node* next=NULL;
 	int i=0;
 	
-	while(current || i!=L-1){
-		next=current;
-		if((node->node_number)>current->node_number){
-			current=current->nodes[i];
-		}
-		else{
-			current=current->nodes[i];
-		}
 
-		i++;
+
 	
-	}
 	Node x;
 	x.print_node(node);
-	//
+	
 }
