@@ -20,16 +20,13 @@ void MinMax::get_possible_shot(grid_t grid ,int played){
 					break;
 			}
 		}
-		
 	}while(res!=1);
-
 }
 
 void MinMax::create_tree(grid_t grid){
 	Tree tree;
 	Node* x;
 	tree.insert_node(x->new_node(0,1,2,grid));
-
 }
 
 
@@ -85,6 +82,7 @@ int MinMax::evaluate_shot(grid_t grid,int played){
 	return 0;
 
 }
+
 int MinMax::check_winner(grid_t grid,int played){
 	played--;
 	if(played==0){

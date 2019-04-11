@@ -47,6 +47,7 @@ Node* Node::new_node(int node_number,int depth,int value,grid_t grid){
 
 
 void Tree::insert_node(Node* node){
+
 	if(!node)
 		return;
 	if(root==NULL){
@@ -54,13 +55,29 @@ void Tree::insert_node(Node* node){
 		return;
 	}
 
+	for(int i=0;i<L;i++){
+		if(node->nodes[i]!=NULL){
+			std::cout<<"there is something\n";
+		}
+		else{
+			node->nodes[i]=node;
+			std::cout<<"There is nothing \n";
+		}
+	}
+
+	for(int i=0;i<L;i++){
+		if(node->nodes[i]!=NULL){
+			std::cout<<"there is something\n";
+		}
+		else{
+			std::cout<<"There is nothing \n";
+		}
+	}
 	Node* current=root;
 	Node* next=NULL;
 	int i=0;
 	
 
-
-	
 	Node x;
 	x.print_node(node);
 	
