@@ -10,9 +10,6 @@ all: main.o game.o alpha-beta.o gameEngine.o node.o
 main.o: main.cpp
 	$(CC) -c main.cpp -o main.o $(CFLAGS)
 
-node.o: node.cpp node.hpp
-	$(CC) -c node.cpp -o node.o $(CFLAGS)
-
 gameEngine.o: gameEngine.cpp gameEngine.hpp
 	$(CC) -c gameEngine.cpp -o gameEngine.o $(CFLAGS)
 
