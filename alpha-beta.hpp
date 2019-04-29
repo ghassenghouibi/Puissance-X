@@ -18,18 +18,27 @@ class Node{
 		Node* new_node(int node_number,int depth,int value,grid_t grid);
 		void  add_node(Node* root_node,Node* new_node,int i);
 		void  print_node(Node *print_node);
-		void  show_grid(grid_t grid);		
+		void  show_grid(grid_t grid);
+		void  print_node_with_child(Node* root_node);
+		void  fill_root_node(Node* root);
+
 };
 
 
 class Tree{
 	
 	public:
-		Node* root;
+		Node* root=new Node();
 		static int node_number;
 		
 	public:
-		void insert_node(Node* node);
+		Node* new_node(int node_number,int depth,int value,grid_t grid);
+		Tree* create_tree(grid_t grid);
+		void  show_tree(grid_t grid);
+		void  show_node(Node* node);
+		void  add_node_to_tree(Node x);
+		Node* get_root_node();
+
 
 };
 

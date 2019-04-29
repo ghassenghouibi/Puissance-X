@@ -3,6 +3,7 @@
 * @author ghouibi ghassen 
 */
 #include <iostream>
+#include <cassert>
 #include "alpha-beta.hpp"
 
 
@@ -12,7 +13,6 @@ void MinMax::get_possible_shot(grid_t grid ,int played){
 	do{
 		for(int i=0;i<L;++i){
 			if(grid.grid[i][H-1]==0){
-				create_tree(grid);
 				grid=simulate_shot(grid,i,(player+1));
 				player=!(player);
 				res=check_winner(grid,played);
@@ -23,12 +23,81 @@ void MinMax::get_possible_shot(grid_t grid ,int played){
 	}while(res!=1);
 }
 
-void MinMax::create_tree(grid_t grid){
-	Tree tree;
-	//Node* x;
-	//tree.insert_node(x->new_node(0,1,2,grid));
+
+void Tree::show_tree(grid_t grid){
+
+	for(int j=H-1;j>=0;j--){
+			for(int i=0;i<L;i++){
+				if(grid.grid[i][j]==1)
+					std::cout<<"O";
+				else if(grid.grid[i][j]==2)
+					std::cout<<"X";
+				else
+					std::cout<<".";
+				std::cout<<" ";
+			}
+			std::cout<<"\n";
+	}
 }
 
+void Node::add_node(Node* root_node,Node* new_node,int i){
+	root_node->nodes[i]=new_node;
+}
+
+void Node::print_node_with_child(Node* node_print){
+
+
+	std::cout   <<"Root Node Node_number " <<node_print->node_number
+					<<" Depth "      <<node_print->depth
+					<<" Value "      <<node_print->value
+					<<" Grid  of node :"      
+					<<" \n";
+					show_grid(node_print->grid);
+		std::cout <<"End printing node\n";
+	//TODO check if nodes[L+1] != nullptr
+	for(int i=0;i<L;i++){
+		
+		std::cout   <<"Child Node Node_number " <<node_print->nodes[i]->node_number
+					<<" Depth "      <<node_print->nodes[i]->depth
+					<<" Value "      <<node_print->nodes[i]->value
+					<<" Grid  of node :"      
+					<<" \n";
+					show_grid(node_print->nodes[i]->grid);
+		std::cout <<"End printing node\n";	
+
+	}
+
+}
+
+void Node::fill_root_node(Node* root){
+	Node* child=new Node();
+	MinMax* mini=new MinMax();
+	for(int i=0;i<7;i++){
+		grid_t gridsimulated=mini->simulate_shot(grid,i,1);
+		child=child->new_node(i,0,0,gridsimulated);
+		child->add_node(root,child,i);
+	}
+	child->print_node_with_child(root);
+}
+
+
+
+Tree* Tree::create_tree(grid_t grid){
+	Tree* tree=new Tree();
+	show_tree(grid);
+
+	Node* root=get_root_node();
+	
+	root=root->new_node(0,0,0,grid);
+	root->fill_root_node(root);
+
+	return tree;
+}
+
+
+Node* Tree::get_root_node(){
+	return root;
+}
 
 grid_t MinMax::simulate_shot(grid_t grid,int position,int player){
 
@@ -154,10 +223,7 @@ int MinMax::check_winner(grid_t grid,int played){
 }
 
 
-void Node::add_node(Node* root_node,Node* new_node,int i){
-	root_node->nodes[i]=new_node;
 
-}
 
 
 void Node::show_grid(grid_t grid){
@@ -199,39 +265,3 @@ Node* Node::new_node(int node_number,int depth,int value,grid_t grid){
 
 
 
-void Tree::insert_node(Node* node){
-
-	if(!node)
-		return;
-	if(root==NULL){
-		root=node;
-		return;
-	}
-
-	for(int i=0;i<L;i++){
-		if(node->nodes[i]!=NULL){
-			std::cout<<"there is something\n";
-		}
-		else{
-			node->nodes[i]=node;
-			std::cout<<"There is nothing \n";
-		}
-	}
-
-	for(int i=0;i<L;i++){
-		if(node->nodes[i]!=NULL){
-			std::cout<<"there is something\n";
-		}
-		else{
-			std::cout<<"There is nothing \n";
-		}
-	}
-	/*Node* current=root;
-	Node* next=NULL;
-	int i=0;
-	
-
-	Node x=new Node();
-	x.print_node(node);*/
-	
-}

@@ -4,8 +4,8 @@ CC = g++
 CFLAGS = -W -Wall -std=c++14 -pthread
  
 
-all: main.o game.o alpha-beta.o gameEngine.o node.o
-	$(CC) main.o game.o alpha-beta.o gameEngine.o node.o -o Connect4
+all: main.o game.o alpha-beta.o gameEngine.o 
+	$(CC) main.o game.o alpha-beta.o gameEngine.o -o Connect4
 
 main.o: main.cpp
 	$(CC) -c main.cpp -o main.o $(CFLAGS)

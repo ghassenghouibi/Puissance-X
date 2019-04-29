@@ -22,7 +22,7 @@ void GameEngine::game_engine(){
 	Game game;
 	MinMax ia;
 	grid_t grid;
-	
+	Tree t;
 	grid=game.init_grid();
 	
 	game.show_grid(grid);
@@ -36,7 +36,9 @@ void GameEngine::game_engine(){
 		    do{
 	    	   	std::cout <<"Player "<<player<< " Your placment please? \n";
 		    	std::cin >> placment;
-				    	
+		    	std::cout<<"||||||||||||||||||||||||||||||||||\n";
+				t.create_tree(grid);
+				std::cout<<"||||||||||||||||||||||||||||||||||\n";
 		    	v=game.check_play(grid,placment);
 		    	grid=game.play(grid,placment,player);
 		
