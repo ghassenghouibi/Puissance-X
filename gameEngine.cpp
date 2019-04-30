@@ -37,8 +37,6 @@ void GameEngine::game_engine(){
 		    do{
 	    	   	std::cout <<"Player "<<player<< " Your placment please? \n";
 		    	std::cin >> placment;
-		    	std::cout<<"||||||||||||||||||||||||||||||||||\n";
-				std::cout<<"||||||||||||||||||||||||||||||||||\n";
 		    	v=game.check_play(grid,placment);
 		    	grid=game.play(grid,placment,player);
 		
