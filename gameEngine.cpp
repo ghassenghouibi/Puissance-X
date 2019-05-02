@@ -11,7 +11,7 @@ void GameEngine::print_welcome(){
 }
 
 void GameEngine::print_goodbye(){
-	std::cout<<"GoodBye my friend \n";
+	std::cout<<"GoodBye my friend\n";
 }
 
 void GameEngine::game_engine(){
@@ -20,13 +20,12 @@ void GameEngine::game_engine(){
 	int player,v,x,placment;
 	bool swap=true;
 	Game game;
-	MinMax ia;
 	grid_t grid;
-	Node t;
+	Tree t;
 	grid=game.init_grid();
 	
 	game.show_grid(grid);
-	t.engine_nodes(grid);
+	t.create_tree(grid);
 	do{
 		if(swap)
 			player=1;
@@ -35,7 +34,7 @@ void GameEngine::game_engine(){
 
 		if(player==1){
 		    do{
-	    	   	std::cout <<"Player "<<player<< " Your placment please? \n";
+	    	   	std::cout <<"Player "<<player<< " Your placment please? ";
 		    	std::cin >> placment;
 		    	v=game.check_play(grid,placment);
 		    	grid=game.play(grid,placment,player);
@@ -45,8 +44,8 @@ void GameEngine::game_engine(){
 		else if(player==2){
 			do{
 	    	   	
-	    	   	std::cout <<"IA "<<player<< " Your placment please? \n";
-				placment=ia.play(grid,L*H);
+	    	   	std::cout <<"Player "<<player<< " Your placment please? ";
+		    	std::cin >> placment;
 		    	v=game.check_play(grid,placment);
 		    	grid=game.play(grid,placment,player);
 		

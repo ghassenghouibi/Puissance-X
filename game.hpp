@@ -7,7 +7,7 @@
 class Game{
 	public:
 		grid_t grid;
-		int played=L*H;
+		int played=W*H;
 	public:
 		grid_t    init_grid();
 		grid_t    get_grid();

@@ -11,9 +11,9 @@
 * Function to init the grid
 */
 grid_t Game::init_grid(){
-	grid.line=L;
+	grid.line=W;
 	grid.colomn=H;
-	for(int i=0;i<L;i++){
+	for(int i=0;i<W;i++){
 		for(int j=0;j<H;j++)
 			grid.grid[i][j]=0;
 	}
@@ -33,7 +33,7 @@ grid_t Game::get_grid(){
 void Game::show_grid(grid_t grid){
 
 	for(int j=H-1;j>=0;j--){
-			for(int i=0;i<L;i++){
+			for(int i=0;i<W;i++){
 				if(grid.grid[i][j]==1)
 					std::cout<<"O";
 				else if(grid.grid[i][j]==2)
@@ -65,7 +65,7 @@ grid_t Game::play(grid_t grid,int placement,int player){
 * Function check the next played move if we can place our pawn
 */
 int Game::check_play(grid_t grid,int placement){
-	if(placement>=L){
+	if(placement>=W){
 		std::cout<<"This placment does'nt exist ! \n";
 		return 0;
 	}
@@ -88,7 +88,7 @@ int Game::check_winner(grid_t grid){
 		return 1;
 	}
 	//check vertical
-	for(int i=0;i<L;i++){
+	for(int i=0;i<W;i++){
 		for(int j=3;j<H;j++){
 			if( 	(grid.grid[i][j] != 0) 
 				 && ( grid.grid[i][j]== grid.grid[i][j-1] )
@@ -102,7 +102,7 @@ int Game::check_winner(grid_t grid){
 	}
 
 	//check horizontal
-	for(int i=3;i<L;i++){
+	for(int i=3;i<W;i++){
 		for(int j=0;j<H;j++){
 			if( 	(grid.grid[i][j] != 0) 
 				 && ( grid.grid[i][j]== grid.grid[i-1][j] )
@@ -116,7 +116,7 @@ int Game::check_winner(grid_t grid){
 	}
 
 	//check diagonal
-	for(int i=3;i<L;i++){
+	for(int i=3;i<W;i++){
 		for(int j=3;j<H;j++){
 			if( 	(grid.grid[i][j] != 0) 
 				 && ( grid.grid[i][j]== grid.grid[i-1][j-1] )
@@ -131,7 +131,7 @@ int Game::check_winner(grid_t grid){
 	}
 	
 	//check diagonal
-	for(int i=3;i<L;i++){
+	for(int i=3;i<W;i++){
 		for(int j=0;j<H-4;j++){
 
 			if( 	(grid.grid[i][j] != 0) 

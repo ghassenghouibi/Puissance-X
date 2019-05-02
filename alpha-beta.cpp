@@ -10,7 +10,7 @@
 void MinMax::get_possible_shot(grid_t grid ,int played){
 	int res,player=1;
 	do{
-		for(int i=0;i<L;++i){
+		for(int i=0;i<W;++i){
 			if(grid.grid[i][H-1]==0){
 				grid=simulate_shot(grid,i,(player+1));
 				player=!(player);
@@ -35,7 +35,7 @@ grid_t MinMax::simulate_shot(grid_t grid,int position,int player){
 }
 
 int MinMax::check(grid_t grid){
-	for(int i=0;i<L;++i){
+	for(int i=0;i<W;++i){
 		if(grid.grid[i][H-1]==0)
 			return i;
 	}
@@ -68,7 +68,7 @@ int MinMax::check_winner(grid_t grid,int played){
 		return 1;
 	}
 	//check vertical
-	for(int i=0;i<L;i++){
+	for(int i=0;i<W;i++){
 		for(int j=3;j<H;j++){
 			if( 	(grid.grid[i][j] != 0) 
 				 && ( grid.grid[i][j]== grid.grid[i][j-1] )
@@ -82,7 +82,7 @@ int MinMax::check_winner(grid_t grid,int played){
 	}
 
 	//check horizontal
-	for(int i=3;i<L;i++){
+	for(int i=3;i<W;i++){
 		for(int j=0;j<H;j++){
 			if( 	(grid.grid[i][j] != 0) 
 				 && ( grid.grid[i][j]== grid.grid[i-1][j] )
@@ -96,7 +96,7 @@ int MinMax::check_winner(grid_t grid,int played){
 	}
 
 	//check diagonal
-	for(int i=3;i<L;i++){
+	for(int i=3;i<W;i++){
 		for(int j=3;j<H;j++){
 			if( 	(grid.grid[i][j] != 0) 
 				 && ( grid.grid[i][j]== grid.grid[i-1][j-1] )
@@ -111,7 +111,7 @@ int MinMax::check_winner(grid_t grid,int played){
 	}
 	
 	//check diagonal
-	for(int i=3;i<L;i++){
+	for(int i=3;i<W;i++){
 		for(int j=0;j<H-4;j++){
 
 			if( 	(grid.grid[i][j] != 0) 
