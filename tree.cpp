@@ -5,34 +5,60 @@
 void Tree::create_tree(grid_t grid){
 
 
-	Tree root;
-	Node* new_node=new Node();
-	int depth=0;
+	
+	std::vector<Node*> tree;
 
-	new_node->fill_root_node(new_node,grid,0,1,depth);
+	std::vector<grid_t> treeGrid;
 
+	Node* root=new Node();
+	root=root->create_node(grid,1);
 
-
-	depth++;
-	for(int j=0;j<W;j++){
-		for(int i=0;i<W;i++){
-			Node* t;
-			t=new Node();
-			t->fill_root_node(new_node->nodes[j],new_node->nodes[j]->grid,0,2,depth);
-		}
+	for(int i=0;i<root->childNodes.size();i++){
+		tree.push_back(root->childNodes[i]);
 	}
-	new_node->print_node_with_child(new_node->nodes[1]);
 
-	//new_node->print_node_with_child(new_node->nodes[2]);
-
-	/*int possible=1;
-	for(int j=0;j<2;j++){
-		grid=new_node->nodes[j]->grid;
+	int size=tree.size();
+	int first_size=0;
+	int played=H*W;
+	played--;
+	int player=2;
+	Node* f;
+	while(played){
 		
-		new_node->print_node_with_child()
-		new_node=new_node->nodes[0];
+		f=new Node();
+		for(int j=0;j<size;j++){
+			for(int i=0;i<W;i++){
+				f=f->create_node(tree[j]->grid,player);
+			}
+			/*std::cout<<"\n played :"<<played<<"\n";
+			std::cout<<"\n size :"<<size<<" now :"<<j<<"\n";
+			std::cout<<"\n childNodes :"<<f->childNodes.size()<<"\n";*/
+			for(int k=0;k<f->childNodes.size();k++){
+				tree.push_back(f->childNodes[k]);
+			}
+		}
+		if(player==2)
+			player=1;
+		else
+			player=2;
+
+		//tree.erase(tree.begin(),tree.begin()+size);
+		size=tree.size();
+		played--;
+	}
+
+
+
+
+	/*for(int i=0;i<tree.size();i++){
+		std::cout<<"------------"<<i<<"----------\n";
+		root->show_grid(tree[i]->grid);
+		std::cout<<"------------H---------\n";
 	}
 	*/
+	std::cout<<"\n"<<tree.size()<<"\n";
+
+
 
 
 
