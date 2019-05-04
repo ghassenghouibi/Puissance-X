@@ -47,10 +47,10 @@ void GameEngine::game_engine(){
 			do{
 	    	   	
 	    	   	std::cout <<"Player "<<player<< " Your placment please? ";
-		    	std::cin >> placment;
-		    	v=game.check_play(grid,placment);
-		    	grid=game.play(grid,placment,player);
-	    		t.create_tree(grid,5);
+		    	//std::cin >> placment;
+		    	//v=game.check_play(grid,placment);
+		    	grid=game.play(grid,t.create_tree(grid,5),player);
+	    		
 			}while(v==0);	
 		}
     	x=game.check_winner(grid);

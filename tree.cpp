@@ -2,7 +2,7 @@
 
 
 
-void Tree::create_tree(grid_t grid,int depth){
+int Tree::create_tree(grid_t grid,int depth){
 
 
 	std::vector<Node*> tree;
@@ -44,19 +44,13 @@ void Tree::create_tree(grid_t grid,int depth){
 
 	for(int i=0;i<signed(tree.size());i++){
 		if(tree[i]->value==10){
-			std::cout<<"win case\n";
-			root->show_grid(tree[i]->grid);
-		}
-		if(tree[i]->value==-10){
-			std::cout<<"lose case\n";
-			root->show_grid(tree[i]->grid);
-		}
-		//std::cout<<"---------------------------\n";
-		//
-		//std::cout<<"---------------------------\n";
-	
+			std::cout<<tree[i]->node_number<<"\n";
+			return tree[i]->node_number;
+			//root->show_grid(tree[i]->grid);
+		}		
 	}
-	std::cout<<tree.size()<<"\n";
+
+	return tree[tree.size()-1]->node_number;
 }
 
 /*

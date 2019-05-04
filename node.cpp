@@ -50,7 +50,7 @@ Node* Node::fill_node(Node* root,int node_number,int player){
 		if(possible_shots(root->grid,i)){
 			grid_t gridsimulated=simulate_shot(root->grid,i,player);
 			Node* child=new Node();
-			child=new_node(node_number,++(root->depth),0,gridsimulated);
+			child=new_node(i,++(root->depth),0,gridsimulated);
 			child->value=evalute_node(child->grid,player);	
 			(root->childNodes).push_back(child);
 			node_number++;
