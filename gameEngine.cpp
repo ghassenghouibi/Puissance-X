@@ -16,16 +16,17 @@ void GameEngine::print_goodbye(){
 
 void GameEngine::game_engine(){
 	
-	print_welcome();
+
 	int player,v,x,placment;
 	bool swap=true;
 	Game game;
 	grid_t grid;
 	Tree t;
 	grid=game.init_grid();
-	
+	print_welcome();
 	game.show_grid(grid);
-	t.create_tree(grid);
+
+	//t.create_tree(grid,5);
 	do{
 		if(swap)
 			player=1;
@@ -34,11 +35,12 @@ void GameEngine::game_engine(){
 
 		if(player==1){
 		    do{
+
 	    	   	std::cout <<"Player "<<player<< " Your placment please? ";
 		    	std::cin >> placment;
 		    	v=game.check_play(grid,placment);
 		    	grid=game.play(grid,placment,player);
-		
+	    		//t.create_tree(grid,5);
 			}while(v==0);
 		}
 		else if(player==2){
@@ -46,9 +48,9 @@ void GameEngine::game_engine(){
 	    	   	
 	    	   	std::cout <<"Player "<<player<< " Your placment please? ";
 		    	std::cin >> placment;
-		    	v=game.check_play(grid,placment);
+		    	v=game.check_play(grid,2);
 		    	grid=game.play(grid,placment,player);
-		
+	    		//t.create_tree(grid,5);
 			}while(v==0);	
 		}
     	x=game.check_winner(grid);

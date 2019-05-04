@@ -17,8 +17,6 @@ Node* Node::create_node(grid_t grid,int player){
 
 	Node* node=new Node();
 	node=new_node(0,0,0,grid);
-	int depth=node->depth;
-
 	node=fill_node(node,1,player);
 
 	return node;
@@ -44,6 +42,8 @@ int Node::possible_shots(grid_t grid,int position){
 	return 0;
 }
 
+
+
 Node* Node::fill_node(Node* root,int node_number,int player){
 
 	for(int i=0;i<W;i++){
@@ -53,16 +53,8 @@ Node* Node::fill_node(Node* root,int node_number,int player){
 			child=new_node(node_number,++(root->depth),0,gridsimulated);
 			(root->childNodes).push_back(child);
 			node_number++;
-
 		}
-
 	}
-	if(root->childNodes.size()==1){
-		//std::cout<<"\n     Evaluteee ....\n";
-	}
-	//std::cout<<"------------------------------\n";
-	//print_node_with_child(root);
-	//std::cout<<"------------------------------\n";
 
 	return root;
 }
