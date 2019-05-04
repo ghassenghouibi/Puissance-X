@@ -20,7 +20,7 @@ void Tree::create_tree(grid_t grid,int depth){
 	int size=tree.size();
 	int player=2;
 	Node* f;
-	
+
 	while(depth){
 
 		f=new Node();
@@ -43,9 +43,18 @@ void Tree::create_tree(grid_t grid,int depth){
 	}
 
 	for(int i=0;i<signed(tree.size());i++){
-		std::cout<<"---------------------------\n";
-		root->show_grid(tree[i]->grid);
-		std::cout<<"---------------------------\n";
+		if(tree[i]->value==10){
+			std::cout<<"win case\n";
+			root->show_grid(tree[i]->grid);
+		}
+		if(tree[i]->value==-10){
+			std::cout<<"lose case\n";
+			root->show_grid(tree[i]->grid);
+		}
+		//std::cout<<"---------------------------\n";
+		//
+		//std::cout<<"---------------------------\n";
+	
 	}
 	std::cout<<tree.size()<<"\n";
 }

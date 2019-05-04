@@ -21,7 +21,8 @@ class Node{
 		Node*  create_node(grid_t grid,int player);
 		int    grid_is_full(grid_t grid);
 		int    possible_shots(grid_t grid,int position);
-	
+		int    evalute_node(grid_t grid,int player);
+
 };
 
 

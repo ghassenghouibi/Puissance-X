@@ -51,6 +51,7 @@ Node* Node::fill_node(Node* root,int node_number,int player){
 			grid_t gridsimulated=simulate_shot(root->grid,i,player);
 			Node* child=new Node();
 			child=new_node(node_number,++(root->depth),0,gridsimulated);
+			child->value=evalute_node(child->grid,player);	
 			(root->childNodes).push_back(child);
 			node_number++;
 		}
@@ -112,4 +113,87 @@ int Node::grid_is_full(grid_t grid){
 		}
 	}
 	return 1;
+}
+
+
+int Node::evalute_node(grid_t grid,int player){
+	
+	//check vertical
+	for(int i=0;i<W;i++){
+		for(int j=3;j<H;j++){
+			if( 	(grid.grid[i][j] != 0) 
+				 && ( grid.grid[i][j]== grid.grid[i][j-1] )
+				 && ( grid.grid[i][j]== grid.grid[i][j-2] )
+				 && ( grid.grid[i][j]== grid.grid[i][j-3] )
+				 ){
+				if(grid.grid[i][j]==player){
+					return 10;	
+				}
+				else{
+					return -10;
+				}
+			}
+		}
+	}
+
+	//check horizontal
+	for(int i=3;i<W;i++){
+		for(int j=0;j<H;j++){
+			if( 	(grid.grid[i][j] != 0) 
+				 && ( grid.grid[i][j]== grid.grid[i-1][j] )
+				 && ( grid.grid[i][j]== grid.grid[i-2][j] )
+				 && ( grid.grid[i][j]== grid.grid[i-3][j] )
+				 ){
+				if(grid.grid[i][j]==player){
+					return 10;	
+				}
+				else{
+					return -10;
+				}
+			}
+		}
+	}
+
+	//check diagonal
+	for(int i=3;i<W;i++){
+		for(int j=3;j<H;j++){
+			if( 	(grid.grid[i][j] != 0) 
+				 && ( grid.grid[i][j]== grid.grid[i-1][j-1] )
+				 && ( grid.grid[i][j]== grid.grid[i-2][j-2] )
+				 && ( grid.grid[i][j]== grid.grid[i-3][j-3] )
+				 ){
+				if(grid.grid[i][j]==player){
+					return 10;	
+				}
+				else{
+					return -10;
+				}
+			}
+			
+		}
+	}
+	
+	//check diagonal
+	for(int i=3;i<W;i++){
+		for(int j=0;j<H-4;j++){
+
+			if( 	(grid.grid[i][j] != 0) 
+				 && ( grid.grid[i][j]== grid.grid[i-1][j+1] )
+				 && ( grid.grid[i][j]== grid.grid[i-2][j+2] )
+				 && ( grid.grid[i][j]== grid.grid[i-3][j+3] )
+				 ){
+				if(grid.grid[i][j]==player){
+					return 10;	
+				}
+				else{
+					return -10;
+				}
+			}
+			
+		}
+	}
+	
+
+	return 0;
+	
 }
