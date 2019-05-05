@@ -1,6 +1,9 @@
+/*
+This file containes the grid of the game with width & height 
+*/
 #ifndef __SHARED_HPP_
 #define __SHARED_HPP_
-	#define W 7
+	#define W 6
 	#define H 6
 
 	typedef struct grid_t grid_t;

@@ -1,7 +1,6 @@
-/*
-* This file contains the functions of the gameEngine class
+/** This file contains the functions of the gameEngine class
 * @author ghouibi ghassen
-*/
+**/
 #include <iostream>
 #include "gameEngine.hpp"
 #include "alpha-beta.hpp"
@@ -20,13 +19,13 @@ void GameEngine::game_engine(){
 	int player,v,x,placment;
 	bool swap=true;
 	Game game;
+	MinMax ia;
 	grid_t grid;
 	Tree t;
 	grid=game.init_grid();
 	print_welcome();
 	game.show_grid(grid);
 
-	//t.create_tree(grid,8);
 	do{
 		if(swap)
 			player=1;
@@ -35,22 +34,20 @@ void GameEngine::game_engine(){
 
 		if(player==1){
 		    do{
-
-	    	   	std::cout <<"Player "<<player<< " Your placment please? ";
+				ia.negamax(grid,0,player);
+	    	   	std::cout <<"Player "<<player<< " Your placment please? \n";
 		    	std::cin >> placment;
 		    	v=game.check_play(grid,placment);
 		    	grid=game.play(grid,placment,player);
-	    		//t.create_tree(grid,5);
 			}while(v==0);
 		}
 		else if(player==2){
 			do{
-	    	   	
-	    	   	std::cout <<"Player "<<player<< " Your placment please? ";
-		    	//std::cin >> placment;
-		    	//v=game.check_play(grid,placment);
-		    	grid=game.play(grid,t.create_tree(grid,5),player);
-	    		
+	    	   	ia.negamax(grid,0,player);
+	    	   	std::cout <<"Player "<<player<< " Your placment please? \n";
+		    	std::cin >> placment;
+		    	v=game.check_play(grid,placment);
+		    	grid=game.play(grid,placment,player);
 			}while(v==0);	
 		}
     	x=game.check_winner(grid);

@@ -11,7 +11,7 @@ int Tree::create_tree(grid_t grid,int depth){
 
 	Node* root=new Node();
 	root=root->create_node(grid,1);
-	root->show_grid(root->grid);
+
 
 	for(int i=0;i<signed(root->childNodes.size());i++){
 		tree.push_back(root->childNodes[i]);
@@ -44,18 +44,14 @@ int Tree::create_tree(grid_t grid,int depth){
 
 	for(int i=0;i<signed(tree.size());i++){
 		if(tree[i]->value==10){
-			std::cout<<tree[i]->node_number<<"\n";
-			return tree[i]->node_number;
+			//std::cout<<tree[i]->node_number<<"\n";
+			//return tree[i]->node_number;
 			//root->show_grid(tree[i]->grid);
 		}		
+
 	}
-
-	return tree[tree.size()-1]->node_number;
+	//std::cout<<"\n"<<tree.size()<<" iteration\n";
+	int number=tree[tree.size()-1]->node_number;
+	tree.clear();
+	return number;
 }
-
-/*
-void save_child(Node* child){
-	std::lock_guard<std::mutex> lock(numbers_mutex);
-	tree.push_back(child);
-}
-*/
