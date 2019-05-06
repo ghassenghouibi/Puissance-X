@@ -8,7 +8,7 @@
 #include "game.hpp"
 
 /*
-* Function to init the grid
+*Function to init the grid
 */
 grid_t Game::init_grid(){
 	grid.line=W;

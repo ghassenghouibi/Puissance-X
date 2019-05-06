@@ -11,8 +11,8 @@ int Tree::create_tree(grid_t grid,int depth){
 
 	Node* root=new Node();
 	root=root->create_node(grid,1);
-
-
+	root->print_node_with_child(root);
+	exit(0);
 	for(int i=0;i<signed(root->childNodes.size());i++){
 		tree.push_back(root->childNodes[i]);
 	}

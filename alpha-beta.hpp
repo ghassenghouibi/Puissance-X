@@ -9,9 +9,12 @@
 class MinMax{
 				
 	public:
-		int     negamax(grid_t grid,int depth,int player);		
-		int     grid_full(grid_t grid);
+		int              negamax(grid_t grid,int depth,int player);		
+		int              grid_full(grid_t grid);
 		std::vector<int> get_possible_shots(grid_t grid);
+		int     		 check_win(grid_t grid);
+		int 			 evalute_grid(grid_t grid,int player);
+
 
 		int 	play(grid_t grid,int played);
 		int     check(grid_t grid); 

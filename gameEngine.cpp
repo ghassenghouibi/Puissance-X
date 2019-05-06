@@ -34,11 +34,17 @@ void GameEngine::game_engine(){
 
 		if(player==1){
 		    do{
-				ia.negamax(grid,0,player);
-	    	   	std::cout <<"Player "<<player<< " Your placment please? \n";
-		    	std::cin >> placment;
+				placment=ia.negamax(grid,0,player);
+		    	//t.create_tree(grid,5);
 		    	v=game.check_play(grid,placment);
 		    	grid=game.play(grid,placment,player);
+		    	if(v!=1){
+	    			std::cout <<"Player "<<player<< " Your placment please? \n";
+		    		std::cin >> placment;
+			    	v=game.check_play(grid,placment);
+			    	grid=game.play(grid,placment,player);
+
+		    	}
 			}while(v==0);
 		}
 		else if(player==2){
