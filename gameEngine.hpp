@@ -1,6 +1,5 @@
 /**
 *This class contains the game engine
-*@author ghouibi ghassen
 */
 class GameEngine{
 	public:

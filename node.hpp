@@ -9,7 +9,7 @@ class Node{
 		int depth;
 		int value;
 		grid_t grid;
-		std::vector<Node*> childNodes;
+		Node* childNodes[W];
 	public:
 		Node*  new_node(int node_number,int depth,int value,grid_t grid);
 		grid_t simulate_shot(grid_t grid,int position,int player);

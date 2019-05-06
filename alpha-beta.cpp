@@ -14,58 +14,60 @@ int MinMax::check(grid_t grid){
 }
 
 int a=0;
-int MinMax::negamax(grid_t grid, int depth ,int player){
+int MinMax::negamax(Node* node, int depth ,int player){
 	a++;
-	std::cout<<"Appel :"<<a<<"\n";
-	if(grid_full(grid)){
+	if(grid_full(node->grid)){
 		std::cout<<"grid is full fool";
 		return 0;
 	}
 
-	int eval=evalute_grid(grid,player);
-	std::vector<int> shots=get_possible_shots(grid);
-	for(int i=0;i<shots.size();i++){
-		if(!(grid_full(grid)) && check_win( simulate_shot(grid,i,player))){
-			std::cout<<"Winn !\n";
-			return 10-i;
+	int eval=evalute_grid(node->grid,player);
+	std::vector<int> shots=get_possible_shots(node->grid);
+	for(int i=0;i<signed(shots.size());i++){
+		if(!(grid_full(node->grid)) && check_win( simulate_shot(node->grid,i,player))){
+			return 1000-i;
 		}
 	}
 
-	int best_score=10;
-	for(int i=0;i<W;i++){
-		if(!(grid_full(grid)) ){
-			Node* new_node=new Node();
-			new_node=new_node->create_node(grid,player);
-			new_node->print_node_with_child(new_node);
+	
 
+	int best_score=0;
+	for(int i=0;i<W;i++){
+        if(!(height_full(node->grid,i))){
+			Node* new_node=new_node->new_node(i,a,eval,node->grid);
+			
+			grid_t gridPlayed=new_node->simulate_shot(node->grid,i,player);
+			Node* child =child->new_node(i,a++,eval,gridPlayed);
+			new_node->childNodes[i]=child;
 			if(player==2)
 				player=1;
 			else
 				player=2;
-
-			int acctual_score;
-			std::cout<<i<<"<===================\n";
-			std::cout<<new_node->childNodes.size()<<"<=============\n";
-			if(i<new_node->childNodes.size())
-				acctual_score=-negamax(new_node->childNodes[i]->grid,depth,player);
-
-
-
-			//for(int k=0;k<signed(new_node->childNodes.size());k++){
-			//	std::cout<<"Score   "<<acctual_score<<"\n";
-			//}
-			if(acctual_score>best_score){
-				best_score=acctual_score;
-				new_node->node_number=i;
+			new_node->print_node_with_child(new_node);
+			int actual_score=negamax(new_node->childNodes[i],depth,player);
+			std::cout<<"score "<<actual_score<<" \n";
+			if(actual_score>best_score){
+				best_score=actual_score;
+				child->node_number=i;
+				std::cout<<"hahahahahahha \n "<<i;
 			}
 			//int acctual_score=-negamax(new_node->grid,depth,player);
 			
 		}
 	}
-	std::cout<<"The besttt \n"<<best_score<<"\n";
+	std::cout<<"The bestt \n"<<best_score<<"\n";
+	
 	return best_score;
 }
 
+int MinMax::height_full(grid_t grid,int position){
+	for(int i=0;i<H;i++){
+		if(grid.grid[position][i]==0){
+			return 0;
+		}
+	}
+	return 1;
+}
 
 grid_t MinMax::simulate_shot(grid_t grid,int position,int player){
 	for(int i=0;i<H;i++){
@@ -96,7 +98,7 @@ std::vector<int> MinMax::get_possible_shots(grid_t grid){
 
 int MinMax::evalute_grid(grid_t grid,int player){
 
-		//check vertical
+	//check vertical
 	for(int i=0;i<W;i++){
 		for(int j=3;j<H;j++){
 			if( 	(grid.grid[i][j] != 0) 
@@ -105,10 +107,10 @@ int MinMax::evalute_grid(grid_t grid,int player){
 				 && ( grid.grid[i][j]== grid.grid[i][j-3] )
 				 ){
 				if(grid.grid[i][j]==player){
-					return 10;	
+					return 1000  ;	
 				}
 				else{
-					return -10;
+					return -1000 ;
 				}
 			}
 		}
@@ -123,10 +125,10 @@ int MinMax::evalute_grid(grid_t grid,int player){
 				 && ( grid.grid[i][j]== grid.grid[i-3][j] )
 				 ){
 				if(grid.grid[i][j]==player){
-					return 10;	
+					return 1000;	
 				}
 				else{
-					return -10;
+					return -1000;
 				}
 			}
 		}
@@ -141,10 +143,10 @@ int MinMax::evalute_grid(grid_t grid,int player){
 				 && ( grid.grid[i][j]== grid.grid[i-3][j-3] )
 				 ){
 				if(grid.grid[i][j]==player){
-					return 10;	
+					return 1000;	
 				}
 				else{
-					return -10;
+					return -1000;
 				}
 			}
 			
@@ -161,10 +163,10 @@ int MinMax::evalute_grid(grid_t grid,int player){
 				 && ( grid.grid[i][j]== grid.grid[i-3][j+3] )
 				 ){
 				if(grid.grid[i][j]==player){
-					return 10;	
+					return 1000;	
 				}
 				else{
-					return -10;
+					return -1000;
 				}
 			}
 			

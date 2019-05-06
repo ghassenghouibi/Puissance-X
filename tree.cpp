@@ -13,7 +13,7 @@ int Tree::create_tree(grid_t grid,int depth){
 	root=root->create_node(grid,1);
 	root->print_node_with_child(root);
 	exit(0);
-	for(int i=0;i<signed(root->childNodes.size());i++){
+	for(int i=0;i<W;i++){
 		tree.push_back(root->childNodes[i]);
 	}
 
@@ -28,7 +28,7 @@ int Tree::create_tree(grid_t grid,int depth){
 			for(int i=0;i<W;i++){
 				f=f->create_node(tree[j]->grid,player);
 			}
-			for(int k=0;k<signed(f->childNodes.size());k++){
+			for(int k=0;k<W;k++){
 				tree.push_back(f->childNodes[k]);
 
 			}

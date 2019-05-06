@@ -7,7 +7,9 @@ Node* Node::new_node(int node_number,int depth,int value,grid_t grid){
     new_node->depth=depth;
     new_node->value=value;
     new_node->grid=grid;   
-
+    for(int i=0;i<W;i++){
+    	new_node->childNodes[i]=nullptr;
+    }
     return new_node; 
 }
 
@@ -18,6 +20,8 @@ Node* Node::create_node(grid_t grid,int player){
 	Node* node=new Node();
 	node=new_node(0,0,0,grid);
 	node=fill_node(node,1,player);
+
+	print_node_with_child(node);
 
 	return node;
 }
@@ -48,12 +52,14 @@ Node* Node::fill_node(Node* root,int node_number,int player){
 
 	for(int i=0;i<W;i++){
 		if(possible_shots(root->grid,i)){
+			for(int j=0;j<W;j++){
 			grid_t gridsimulated=simulate_shot(root->grid,i,player);
 			Node* child=new Node();
 			child=new_node(i,++(root->depth),0,gridsimulated);
-			child->value=evalute_node(child->grid,player);	
-			(root->childNodes).push_back(child);
+				
+			root->childNodes[i]=child;
 			node_number++;
+			}
 		}
 	}
 
@@ -71,16 +77,16 @@ void Node::print_node_with_child(Node* node_print){
 					<<" \n";
 					show_grid(node_print->grid);
 				
-	std::cout<<"This root have "<<(node_print->childNodes).size()<<" child\n";
-	int size=(node_print->childNodes).size();
-	for(int i=0;i<size;i++){
+	for(int i=0;i<W;i++){
+		if(node_print->childNodes[i]!=nullptr){
 		std::cout   <<"Root Node Node_number " <<node_print->childNodes[i]->node_number
 					<<" Depth "      <<node_print->childNodes[i]->depth
 					<<" Value "      <<node_print->childNodes[i]->value
 					<<" Grid  of node :"      
 					<<" \n";
 					show_grid(node_print->childNodes[i]->grid);
-	}	
+		}	
+	}
 	std::cout <<"End printing node\n";
 
 
@@ -113,87 +119,4 @@ int Node::grid_is_full(grid_t grid){
 		}
 	}
 	return 1;
-}
-
-
-int Node::evalute_node(grid_t grid,int player){
-	
-	//check vertical
-	for(int i=0;i<W;i++){
-		for(int j=3;j<H;j++){
-			if( 	(grid.grid[i][j] != 0) 
-				 && ( grid.grid[i][j]== grid.grid[i][j-1] )
-				 && ( grid.grid[i][j]== grid.grid[i][j-2] )
-				 && ( grid.grid[i][j]== grid.grid[i][j-3] )
-				 ){
-				if(grid.grid[i][j]==player){
-					return 10;	
-				}
-				else{
-					return -10;
-				}
-			}
-		}
-	}
-
-	//check horizontal
-	for(int i=3;i<W;i++){
-		for(int j=0;j<H;j++){
-			if( 	(grid.grid[i][j] != 0) 
-				 && ( grid.grid[i][j]== grid.grid[i-1][j] )
-				 && ( grid.grid[i][j]== grid.grid[i-2][j] )
-				 && ( grid.grid[i][j]== grid.grid[i-3][j] )
-				 ){
-				if(grid.grid[i][j]==player){
-					return 10;	
-				}
-				else{
-					return -10;
-				}
-			}
-		}
-	}
-
-	//check diagonal
-	for(int i=3;i<W;i++){
-		for(int j=3;j<H;j++){
-			if( 	(grid.grid[i][j] != 0) 
-				 && ( grid.grid[i][j]== grid.grid[i-1][j-1] )
-				 && ( grid.grid[i][j]== grid.grid[i-2][j-2] )
-				 && ( grid.grid[i][j]== grid.grid[i-3][j-3] )
-				 ){
-				if(grid.grid[i][j]==player){
-					return 10;	
-				}
-				else{
-					return -10;
-				}
-			}
-			
-		}
-	}
-	
-	//check diagonal
-	for(int i=3;i<W;i++){
-		for(int j=0;j<H-4;j++){
-
-			if( 	(grid.grid[i][j] != 0) 
-				 && ( grid.grid[i][j]== grid.grid[i-1][j+1] )
-				 && ( grid.grid[i][j]== grid.grid[i-2][j+2] )
-				 && ( grid.grid[i][j]== grid.grid[i-3][j+3] )
-				 ){
-				if(grid.grid[i][j]==player){
-					return 10;	
-				}
-				else{
-					return -10;
-				}
-			}
-			
-		}
-	}
-	
-
-	return 0;
-	
 }

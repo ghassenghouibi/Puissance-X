@@ -1,7 +1,6 @@
 /*
 *This file contains function declared in game.hpp
 *this functions handle the game play and checking the winner
-* @author : ghouibi ghassen
 */
 #include <iostream>
 #include <random>

@@ -1,6 +1,5 @@
 /**
 * This file contains the game rules
-* @author ghouibi ghassen
 */
 #include "shared.hpp"
 
