@@ -1,7 +1,7 @@
 .PHONY: clean
 
 CC = g++
-CFLAGS = -W -Wall -std=c++14 -pthread
+CFLAGS = -O3 -W -Wall -std=c++14 -pthread
  
 
 all: main.o game.o alpha-beta.o gameEngine.o node.o tree.o

@@ -17,7 +17,6 @@ int a=0;
 int MinMax::negamax(Node* node, int depth ,int player){
 	a++;
 	if(grid_full(node->grid)){
-		std::cout<<"grid is full fool";
 		return 0;
 	}
 
@@ -25,13 +24,13 @@ int MinMax::negamax(Node* node, int depth ,int player){
 	std::vector<int> shots=get_possible_shots(node->grid);
 	for(int i=0;i<signed(shots.size());i++){
 		if(!(grid_full(node->grid)) && check_win( simulate_shot(node->grid,i,player))){
-			return 1000-i;
+			return player;
 		}
 	}
 
 	
 
-	int best_score=0;
+	int best_score=1000;
 	for(int i=0;i<W;i++){
         if(!(height_full(node->grid,i))){
 			Node* new_node=new_node->new_node(i,a,eval,node->grid);
@@ -39,23 +38,22 @@ int MinMax::negamax(Node* node, int depth ,int player){
 			grid_t gridPlayed=new_node->simulate_shot(node->grid,i,player);
 			Node* child =child->new_node(i,a++,eval,gridPlayed);
 			new_node->childNodes[i]=child;
+
 			if(player==2)
 				player=1;
 			else
 				player=2;
-			new_node->print_node_with_child(new_node);
+
+			//new_node->print_node_with_child(new_node);
 			int actual_score=negamax(new_node->childNodes[i],depth,player);
-			std::cout<<"score "<<actual_score<<" \n";
+
 			if(actual_score>best_score){
 				best_score=actual_score;
-				child->node_number=i;
-				std::cout<<"hahahahahahha \n "<<i;
 			}
-			//int acctual_score=-negamax(new_node->grid,depth,player);
-			
 		}
 	}
-	std::cout<<"The bestt \n"<<best_score<<"\n";
+	
+	//std::cout<<"The bestt \n"<<best_score<<"\n";
 	
 	return best_score;
 }
@@ -223,7 +221,7 @@ int MinMax::check_win(grid_t grid){
 				 && ( grid.grid[i][j]== grid.grid[i][j-2] )
 				 && ( grid.grid[i][j]== grid.grid[i][j-3] )
 				 ){
-				std::cout<<"We have a winner Player Number  "<<grid.grid[i][j]<<"\n";
+				//std::cout<<"We have a winner Player Number  "<<grid.grid[i][j]<<"\n";
 				return 1;
 			}
 		}
@@ -237,7 +235,7 @@ int MinMax::check_win(grid_t grid){
 				 && ( grid.grid[i][j]== grid.grid[i-2][j] )
 				 && ( grid.grid[i][j]== grid.grid[i-3][j] )
 				 ){
-				std::cout<<"We have a winner Player Number  "<<grid.grid[i][j]<<"\n";
+				//std::cout<<"We have a winner Player Number  "<<grid.grid[i][j]<<"\n";
 				return 1;
 			}
 		}
@@ -251,7 +249,7 @@ int MinMax::check_win(grid_t grid){
 				 && ( grid.grid[i][j]== grid.grid[i-2][j-2] )
 				 && ( grid.grid[i][j]== grid.grid[i-3][j-3] )
 				 ){
-				std::cout<<"We have a winner Player Number  "<<grid.grid[i][j]<<"\n";
+				//std::cout<<"We have a winner Player Number  "<<grid.grid[i][j]<<"\n";
 				return 1;
 			}
 			
@@ -267,7 +265,7 @@ int MinMax::check_win(grid_t grid){
 				 && ( grid.grid[i][j]== grid.grid[i-2][j+2] )
 				 && ( grid.grid[i][j]== grid.grid[i-3][j+3] )
 				 ){
-				std::cout<<"We have a winner Player Number  "<<grid.grid[i][j]<<"\n";
+				//std::cout<<"We have a winner Player Number  "<<grid.grid[i][j]<<"\n";
 				return 1;
 			}
 			

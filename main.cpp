@@ -9,8 +9,8 @@ using namespace std;
 
 int main(){
 
-	GameEngine game;
-	game.game_engine();
-	
+	//GameEngine game;
+	//game.game_engine();
+	std::cout<<sizeof(int)<<"\n";
 	return 0;
 }

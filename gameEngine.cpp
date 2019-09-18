@@ -15,16 +15,24 @@ void GameEngine::print_goodbye(){
 void GameEngine::game_engine(){
 	
 
-	int player,v,x,placment;
-	bool swap=true;
+	int placment;
 	Game game;
 	MinMax ia;
 	grid_t grid;
 	Tree t;
 	grid=game.init_grid();
-	print_welcome();
-	game.show_grid(grid);
-	int abc=5;
+	//print_welcome();
+	//game.show_grid(grid);
+
+	Node* f=new Node();
+
+	f->new_node(0,0,0,grid);
+	placment=ia.negamax(f,0,1);
+	if(placment==1000)
+		std::cout<<"player 1 won \n";
+	else
+		std::cout<<"player 2 won \n";
+	/*
 	do{
 		if(swap)
 			player=1;
@@ -36,7 +44,6 @@ void GameEngine::game_engine(){
     			std::cout <<"Player "<<player<< " Your placment please? \n";
 	    		std::cin >> abc;
 		    	if(abc==7){
-			    	Node* t=new Node();
 					placment=ia.negamax(t,0,player);
 		    	}
 		    	else{
@@ -70,5 +77,6 @@ void GameEngine::game_engine(){
 	}while(x!=1);
 
 	print_goodbye();
+    */
     exit (EXIT_SUCCESS);
 }
